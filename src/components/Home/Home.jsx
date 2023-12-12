@@ -1,4 +1,10 @@
+import Poster from '../Poster/Poster';
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <Poster />
+    </>
+  );
 };
 export default Home;
