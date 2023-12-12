@@ -10,7 +10,7 @@ const Footer = () => {
     <section className={styles.footer}>
       <div className={styles.logo}>
         <Link to={ROUTES.HOME}>
-          <img src={LogoImg} alt="логотип stuff" />
+          <img src={LogoImg} alt="logo stuff" />
         </Link>
       </div>
 

@@ -11,7 +11,7 @@ const Header = () => {
     <div className={styles.header}>
       <div className={styles.logo}>
         <Link to={ROUTES.HOME}>
-          <img src={LogoImg} alt="логотип stuff" />
+          <img src={LogoImg} alt="logo stuff" />
         </Link>
       </div>
 
@@ -31,7 +31,7 @@ const Header = () => {
             <input
               type="text"
               name="search"
-              placeholder="Поиск по сайту..."
+              placeholder="Search by goods..."
               autoComplete="off"
               value=""
               onChange={() => {}}
