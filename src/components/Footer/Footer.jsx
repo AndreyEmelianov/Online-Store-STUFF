@@ -17,7 +17,7 @@ const Footer = () => {
       <div className={styles.rights}>
         Developed by
         <a href="https://github.com/AndreyEmelianov" target="_blank" rel="noreferrer">
-          Andrey Emelianov
+          - Andrey Emelianov
         </a>
       </div>
 
