@@ -10,7 +10,7 @@ const Products = ({ title, products = [], amount, style = {} }) => {
       {title && <h2>{title}</h2>}
       <div className={styles.list}>
         {list.map((product) => (
-          <Link className={styles.product} to={`/products/:${product.id}`} key={product.id}>
+          <Link className={styles.product} to={`/products/${product.id}`} key={product.id}>
             <div
               className={styles.image}
               style={{ backgroundImage: `url(${product.images[0]})` }}
