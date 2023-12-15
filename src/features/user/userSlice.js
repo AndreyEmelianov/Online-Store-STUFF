@@ -13,6 +13,16 @@ export const createUser = createAsyncThunk('@@/user/createUser', async (payload,
   }
 });
 
+export const updateUser = createAsyncThunk('@@/user/updateUser', async (payload, thunkAPI) => {
+  try {
+    const res = await axios.put(`${BASE_URL}/users/${payload.id}`, payload);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return thunkAPI.rejectWithValue(err);
+  }
+});
+
 export const loginUser = createAsyncThunk('@@/user/loginUser', async (payload, thunkAPI) => {
   try {
     const res = await axios.post(`${BASE_URL}/auth/login`, payload);
@@ -74,6 +84,8 @@ const userSlice = createSlice({
     builder.addCase(createUser.rejected, (state) => {
       state.isLoading = false;
     });
+
+    builder.addCase(updateUser.fulfilled, addCurrentUser);
 
     builder.addCase(loginUser.fulfilled, addCurrentUser);
   },
