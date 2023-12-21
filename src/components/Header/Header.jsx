@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { ROUTES } from '../../utils/routes';
 import { toggleForm } from '../../features/user/userSlice';
+import { useGetProductsQuery } from '../../features/api/apiSlice';
 
 import LogoImg from '../../images/logo.svg';
 import AvatarImg from '../../images/avatar.jpg';
@@ -11,6 +12,9 @@ import styles from '../../styles/Header.module.css';
 
 const Header = () => {
   const [values, setValues] = useState({ name: 'Guest', avatar: AvatarImg });
+  const [searchValue, setSearchValue] = useState('');
+
+  const { data, isLoading } = useGetProductsQuery({ title: searchValue });
 
   const { currentUser } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
@@ -29,6 +33,10 @@ const Header = () => {
     } else {
       navigate(ROUTES.PROFILE);
     }
+  };
+
+  const handleSearch = ({ target: { value } }) => {
+    setSearchValue(value);
   };
 
   return (
@@ -57,11 +65,33 @@ const Header = () => {
               name="search"
               placeholder="Search by goods..."
               autoComplete="off"
-              value=""
-              onChange={() => {}}
+              value={searchValue}
+              onChange={handleSearch}
             />
           </div>
-          {false && <div className={styles.box}></div>}
+          {searchValue && (
+            <div className={styles.box}>
+              {isLoading
+                ? 'Loading...'
+                : !data.length
+                ? 'No results'
+                : data.map(({ title, images, id }) => {
+                    return (
+                      <Link
+                        key={id}
+                        to={`/products/${id}`}
+                        className={styles.item}
+                        onClick={() => setSearchValue('')}>
+                        <div
+                          className={styles.image}
+                          style={{ backgroundImage: `url(${images[0]})` }}
+                        />
+                        <div className={styles.title}>{title}</div>
+                      </Link>
+                    );
+                  })}
+            </div>
+          )}
         </form>
 
         <div className={styles.account}>
