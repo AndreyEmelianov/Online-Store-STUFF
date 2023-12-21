@@ -16,7 +16,7 @@ const Header = () => {
 
   const { data, isLoading } = useGetProductsQuery({ title: searchValue });
 
-  const { currentUser } = useSelector(({ user }) => user);
+  const { currentUser, cart } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -104,7 +104,8 @@ const Header = () => {
             <svg className={styles['icon-cart']}>
               <use xlinkHref={`${process.env.PUBLIC_URL}/sprite.svg#bag`} />
             </svg>
-            <span className={styles.count}>0</span>
+
+            {!!cart.length && <span className={styles.count}>{cart.length}</span>}
           </Link>
         </div>
       </div>
